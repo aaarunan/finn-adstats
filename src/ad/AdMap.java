@@ -10,10 +10,10 @@ public class AdMap {
     }
 
     public void map(Ad ad) {
-        if (!adHashMap.containsKey(ad.getAdType())) {
-            adHashMap.put(ad.getAdType(), new AdStats(ad));
-        } else {
+        if (adHashMap.containsKey(ad.getAdType())) {
             adHashMap.get(ad.getAdType()).add(ad);
+        } else {
+            adHashMap.put(ad.getAdType(), new AdStats(ad));
         }
     }
 

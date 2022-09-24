@@ -2,13 +2,12 @@ package ad.filesystem;
 
 import ad.Ad;
 import ad.AdMap;
-import ad.AdStats;
 
 import java.io.*;
 
 public class AdFileHandler {
-    public final static String FILETYPE = "csv";
-    public final static String DEFAULTDIR = System.getProperty("user.dir") + "/resources/";
+    public final static String FILETYPE = "txt";
+    public final static String DEFAULT_DIR = System.getProperty("user.dir") + "/resources/";
     private int lineNr = 1;
 
     public AdFileHandler() {
@@ -17,7 +16,7 @@ public class AdFileHandler {
 
     public AdMap loadAdsFromFile(File file) throws FileFormatException, IOException {
         //Check if file is csv
-        if (!isCsv(file.toString())) {
+        if (!isCorrectFileExtension(file.toString())) {
             throw new FileFormatException(String.format("File '%s' is not csv.", file.getName()));
         }
 
@@ -95,7 +94,7 @@ public class AdFileHandler {
      * @return true if csv
      */
 
-    protected boolean isCsv(String fileName) {
+    protected boolean isCorrectFileExtension(String fileName) {
         int index = fileName.lastIndexOf('.');
 
         if (index <= 0) {

@@ -1,5 +1,7 @@
 package ad;
 
+import java.util.Objects;
+
 public class Ad {
     private long adId;
     private String adType;
@@ -42,4 +44,15 @@ public class Ad {
         this.adPrice = adPrice;
     }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.getAdType(), this.getAdId(), this.getAdPrice());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Ad ad)) return false;
+        return this.getAdType().equals(ad.getAdType()) && this.getAdId() == ad.getAdId() && this.getAdPrice() == this.getAdPrice();
+    }
 }

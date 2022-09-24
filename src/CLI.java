@@ -3,7 +3,6 @@ import ad.filesystem.AdFileHandler;
 import ad.filesystem.FileFormatException;
 
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -11,7 +10,6 @@ public class CLI {
     private final Scanner scanner = new Scanner(System.in);
 
     public CLI() {
-        AdMap adMap = new AdMap();
     }
 
     public void start() {
@@ -28,7 +26,7 @@ public class CLI {
         AdMap adMap = null;
         try {
             AdFileHandler adFileHandler = new AdFileHandler();
-            adMap = adFileHandler.loadAdsFromFile(new File(AdFileHandler.DEFAULTDIR + "/ads.csv"));
+            adMap = adFileHandler.loadAdsFromFile(new File(AdFileHandler.DEFAULT_DIR + "/ads.txt"));
             System.out.println("Done.");
         } catch (IOException | FileFormatException error) {
             System.err.println("Something went wrong with the parsing! \n");
@@ -38,7 +36,7 @@ public class CLI {
     }
 
     private void writeResults(AdMap adMap) {
-        File file = new File(AdFileHandler.DEFAULTDIR + "AdStats.txt");
+        File file = new File(AdFileHandler.DEFAULT_DIR + "AdStats1.txt");
         if (file.exists()) {
             System.out.println("This file already exists, do you want to overwrite it? [y,N]");
             if (!scanner.next().equals("y")) {
@@ -52,7 +50,7 @@ public class CLI {
             //For testing
             System.out.println("Finished.");
         } catch (IOException e) {
-            System.err.println("An unexpected error occured when writing the results!");
+            System.err.println("An unexpected error occurred when writing the results!");
             System.err.println(e.getMessage());
 
         }

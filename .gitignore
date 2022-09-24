@@ -2,4 +2,6 @@
 /.idea
 /out
 *.iml
-/resources/AdStats.txt
+
+#Resources
+/resources/*.txt
