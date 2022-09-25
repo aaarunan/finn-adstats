@@ -5,7 +5,7 @@
 
 #Resources
 /resources/AdStats.txt
-*/resources/tests/
+/resources/tests/*
 
 #Compiled code
 **/*.class

@@ -1,7 +1,0 @@
-0,skateboard,200
-1,skateboard,400
-0,skateboard,200
-0,skateboard,200
-0,skateboard,22.989
-1,dvdplayer,400
-2,dvdplayer,400
