@@ -4,7 +4,7 @@
 *.iml
 
 #Resources
-/resources/*.txt
+/resources/AdStats.txt
 
 #Compile code
 **/*.class
