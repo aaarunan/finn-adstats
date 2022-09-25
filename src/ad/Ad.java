@@ -31,6 +31,10 @@ public class Ad {
         this.adPrice = adPrice;
     }
 
+    public Ad copy() {
+        return new Ad(this.getAdId(), this.getAdType(), this.getAdPrice());
+    }
+
     public long getAdId() {
         return adId;
     }

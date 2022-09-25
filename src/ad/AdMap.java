@@ -1,7 +1,6 @@
 package ad;
 
 import java.util.HashMap;
-import java.util.Map;
 
 /**
  * A map for ads.
@@ -26,10 +25,6 @@ public class AdMap {
         } else {
             adHashMap.put(ad.getAdType(), new AdStats(ad));
         }
-    }
-
-    public Map<String, AdStats> getMap() {
-        return new HashMap<>(adHashMap);
     }
 
     @Override

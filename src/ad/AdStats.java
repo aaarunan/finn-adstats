@@ -35,7 +35,7 @@ public class AdStats {
             throw new IllegalArgumentException("Can not ad different ad type.");
         }
 
-        this.amount += 1;
+        this.amount++;
 
         if (maxPrice < ad.getAdPrice()) {
             maxPrice = ad.getAdPrice();
@@ -43,12 +43,23 @@ public class AdStats {
         if (minPrice > ad.getAdPrice()) {
             minPrice = ad.getAdPrice();
         }
-        if (duplicatesMap.containsKey(ad)) {
-            duplicates++;
+
+        Ad copy = ad.copy();
+        copy.setAdType(null);
+        copy.setAdPrice(0);
+        //copy.setAdId(0);
+
+        // if added one already exists there are two duplicates
+        // else only add one more duplicate
+        if (duplicatesMap.containsKey(copy)) {
+            if (duplicatesMap.get(copy) == 1) {
+                duplicates += 2;
+                duplicatesMap.put(copy, 2);
+            } else {
+                duplicates++;
+            }
         } else {
-            ad.setAdType(null);
-            //ad.setAdPrice(null);
-            duplicatesMap.put(ad, 1);
+            duplicatesMap.put(copy, 1);
         }
 
     }
