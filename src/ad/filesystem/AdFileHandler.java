@@ -5,8 +5,10 @@ import ad.AdMap;
 
 import java.io.*;
 
+/**
+ * Handles ad files from the filesystem. The class parses ads from files, and writes results swell.
+ */
 public class AdFileHandler {
-    public final static String FILETYPE = "txt";
     public final static String DEFAULT_DIR = System.getProperty("user.dir") + "/resources/";
     private int lineNr = 1;
 
@@ -14,16 +16,18 @@ public class AdFileHandler {
 
     }
 
-    public AdMap loadAdsFromFile(File file) throws FileFormatException, IOException {
-        //Check if file is csv
-        if (!isCorrectFileExtension(file.toString())) {
-            throw new FileFormatException(String.format("File '%s' is not csv.", file.getName()));
-        }
-
+    /**
+     * Parses all ads in a file, and adds them into a AdMap
+     *
+     * @param file file that should be parsed
+     * @return Parsed AdMap
+     * @throws FileFormatException if the file is wrongly formatted
+     * @throws IOException         if and I/O exception occurred
+     */
+    public AdMap mapAdsFromFile(File file) throws FileFormatException, IOException {
         AdMap adMap = new AdMap();
 
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
-
             String line;
             lineNr = 1;
             //parse the ads
@@ -38,11 +42,11 @@ public class AdFileHandler {
     }
 
     /**
-     * A helper function that parses a line from a file. It uses regex to clean the values and checks if the health and
-     * count values can be parsed to int.
+     * A helper function that parses a line from a file.
+     * Constructs an Ad if all the fields in the file is valid.
      *
      * @param line line that is being parsed
-     * @return pares values
+     * @return Constructed Ad
      * @throws FileFormatException if the line is wrongly formatted.
      */
 
@@ -85,23 +89,5 @@ public class AdFileHandler {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
             writer.write(adMap.toString());
         }
-    }
-
-    /**
-     * Helper method for checking if file is the correct filetype.
-     *
-     * @param fileName file that is checked
-     * @return true if csv
-     */
-
-    protected boolean isCorrectFileExtension(String fileName) {
-        int index = fileName.lastIndexOf('.');
-
-        if (index <= 0) {
-            return false;
-        }
-
-        String extension = fileName.substring(index + 1);
-        return extension.equals(FILETYPE);
     }
 }
