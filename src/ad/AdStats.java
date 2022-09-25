@@ -9,8 +9,8 @@ public class AdStats {
     private final String adType;
     private final HashMap<Ad, Integer> duplicatesMap;
     private long amount;
-    private double maxPrice;
-    private double minPrice = Double.MAX_VALUE;
+    private Ad expensiveAd = new Ad(0, null, 0);
+    private Ad cheapAd = new Ad(0, null, Double.MAX_VALUE);
     private int duplicates;
 
     /**
@@ -37,11 +37,11 @@ public class AdStats {
 
         this.amount++;
 
-        if (maxPrice < ad.getAdPrice()) {
-            maxPrice = ad.getAdPrice();
+        if (expensiveAd.getAdPrice() < ad.getAdPrice()) {
+            expensiveAd = ad.copy();
         }
-        if (minPrice > ad.getAdPrice()) {
-            minPrice = ad.getAdPrice();
+        if (cheapAd.getAdPrice() > ad.getAdPrice()) {
+            cheapAd = ad.copy();
         }
 
         Ad copy = ad.copy();
@@ -68,12 +68,12 @@ public class AdStats {
         return amount;
     }
 
-    public double getMinPrice() {
-        return minPrice;
+    public Ad getCheapAd() {
+        return cheapAd;
     }
 
-    public double getMaxPrice() {
-        return maxPrice;
+    public Ad getExpensiveAd() {
+        return expensiveAd;
     }
 
     public String getAdType() {
@@ -86,7 +86,13 @@ public class AdStats {
 
     @Override
     public String toString() {
-        return String.format("Ad type:       %s \nAmount of ads: %d \nLowest price:  %.2f \nHighest price: %.2f \nDuplicates:    %d", this.getAdType(), this.getAmount(), this.getMinPrice(), this.getMaxPrice(), this.getDuplicates());
+        return String.format("""
+                Ad type:          %s\s
+                Amount of ads:    %d\s
+                Lowest priced ad: %d  (%.2fkr)\s
+                Highest price:    %d (%.2fkr)\s
+                Duplicates:       %d""",
+                this.getAdType(), this.getAmount(), this.getCheapAd().getAdId(), this.getCheapAd().getAdPrice(), this.getExpensiveAd().getAdId(), this.getExpensiveAd().getAdPrice(), this.getDuplicates());
     }
 
 }
