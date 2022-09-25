@@ -17,10 +17,6 @@ public class AdMap {
         }
     }
 
-    public int size() {
-       return adHashMap.size();
-    }
-
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();

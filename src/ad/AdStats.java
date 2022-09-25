@@ -7,19 +7,18 @@ public class AdStats {
     private long amount;
     private double maxPrice;
     private double minPrice = Double.MAX_VALUE;
-
-    private final HashMap<Ad, Integer> adIdMap;
+    private final HashMap<Ad, Integer> duplicatesMap;
     private int duplicates;
 
     public AdStats(Ad ad) {
-        this.adIdMap = new HashMap<>();
+        this.duplicatesMap = new HashMap<>();
         this.adType = ad.getAdType();
         this.add(ad);
     }
 
     public void add(Ad ad) {
         if (!this.getAdType().equals(ad.getAdType())) {
-            throw new IllegalArgumentException("AdTypes does not match");
+            throw new IllegalArgumentException("Can not ad different ad type.");
         }
 
         this.amount += 1;
@@ -27,14 +26,15 @@ public class AdStats {
         if (maxPrice < ad.getAdPrice()) {
             maxPrice = ad.getAdPrice();
         }
-
         if (minPrice > ad.getAdPrice()) {
             minPrice = ad.getAdPrice();
         }
-        if (adIdMap.containsKey(ad)) {
+        if (duplicatesMap.containsKey(ad)) {
             duplicates++;
         } else {
-            adIdMap.put(ad, 1);
+            ad.setAdType(null);
+            //ad.setAdPrice(null);
+            duplicatesMap.put(ad, 1);
         }
 
     }

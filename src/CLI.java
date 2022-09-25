@@ -28,9 +28,9 @@ public class CLI {
             AdFileHandler adFileHandler = new AdFileHandler();
             adMap = adFileHandler.loadAdsFromFile(new File(AdFileHandler.DEFAULT_DIR + "/ads.txt"));
             System.out.println("Done.");
-        } catch (IOException | FileFormatException error) {
-            System.err.println("Something went wrong with the parsing! \n");
-            System.err.println(error.getMessage());
+        } catch (IOException | FileFormatException e) {
+            System.err.println("An exception was caught during parsing! \n");
+            e.printStackTrace();
         }
         return adMap;
     }
@@ -51,7 +51,7 @@ public class CLI {
             System.out.println("Finished.");
         } catch (IOException e) {
             System.err.println("An unexpected error occurred when writing the results!");
-            System.err.println(e.getMessage());
+            e.printStackTrace();
 
         }
     }

@@ -53,6 +53,6 @@ public class Ad {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Ad ad)) return false;
-        return this.getAdType().equals(ad.getAdType()) && this.getAdId() == ad.getAdId() && this.getAdPrice() == this.getAdPrice();
+        return Objects.equals(this.getAdType(), ad.getAdType()) && this.getAdId() == ad.getAdId() && this.getAdPrice() == this.getAdPrice();
     }
 }
