@@ -87,11 +87,11 @@ public class AdStats {
     @Override
     public String toString() {
         return String.format("""
-                Ad type:          %s\s
-                Amount of ads:    %d\s
-                Lowest priced ad: %d  (%.2fkr)\s
-                Highest price:    %d (%.2fkr)\s
-                Duplicates:       %d""",
+                Ad type:            %s\s
+                Amount of ads:      %d\s
+                Lowest priced ad:   %d  (%.2fkr)\s
+                Highest priced ad:  %d (%.2fkr)\s
+                Duplicates:         %d""",
                 this.getAdType(), this.getAmount(), this.getCheapAd().getAdId(), this.getCheapAd().getAdPrice(), this.getExpensiveAd().getAdId(), this.getExpensiveAd().getAdPrice(), this.getDuplicates());
     }
 
